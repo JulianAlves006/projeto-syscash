@@ -37,7 +37,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#" title="Home" id="home_index_contapagar"><i class="fas fa-home"></i>
                                     <span>Home</span></a></li>
-                            <li class="breadcrumb-item"><a href="#" title="Contas a Receber" id="contapagar_index"><i class="fas fa-calendar-plus"></i> <span>Contas a Receber</span></a></li>
+                            <li class="breadcrumb-item"><a href="#" title="Contas a  pagar" id="contapagar_index"><i class="fas fa-calendar-plus"></i> <span>Contas a  pagar</span></a></li>
                             <li class="breadcrumb-item active" aria-current="page">Adicionar</li>
                         </ol>
                     </nav>
