@@ -31,7 +31,7 @@ try {
     $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
 
     //Sql para ser consultada
-    $sql = "select * from conta_receber where (id like :palavra or descricao like :palavra or favorecido like :palavra) and usuario_id = :id order by id asc ";
+    $sql = "select * from conta_pagar where (id like :palavra or descricao like :palavra or favorecido like :palavra) and usuario_id = :id order by id asc ";
 
     // Codificação da paginação
     $pre_pagina = $conexao->prepare($sql);
@@ -79,7 +79,7 @@ try {
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-4 d-flex justify-content-start">
-                    <h4>Lista de Contas a Receber</h4>
+                    <h4>Lista de Contas a Pagar</h4>
                 </div>
                 <div class="col-md-4 d-flex justify-content-center">
                 </div>
@@ -88,7 +88,7 @@ try {
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#" title="Home" id="home_index_contapagar"><i class="fas fa-home"></i>
                                     <span>Home</span></a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Contas a Receber</li>
+                            <li class="breadcrumb-item active" aria-current="page">Contas a Pagar</li>
                         </ol>
                     </nav>
                 </div>
@@ -129,7 +129,7 @@ try {
             ?>
                 <div class="alert alert-info alert-dismissible fade show" role="alert">
                     <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>
-                    Nenhuma conta a receber encontrada!
+                    Nenhuma conta pagar encontrada!
                 </div>
             <?php
             } else {

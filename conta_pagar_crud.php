@@ -3,7 +3,7 @@ require_once("valida_acesso.php");
 ?>
 <?php
 require_once("conexao.php");
-require_once("conta_receber_filtro.php");
+require_once("conta_pagar_filtro.php");
 
 //operações via ajax
 if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
@@ -20,7 +20,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                 $registro = json_decode($_POST['registro']);
                 validaDados($registro);
 
-                $sql = "insert into conta_receber(descricao, favorecido, valor, data_vencimento, categoria_id, usuario_id) VALUES (?, ?, ?, ?, ?, ?) ";
+                $sql = "insert into conta_pagar(descricao, favorecido, valor, data_vencimento, categoria_id, usuario_id) VALUES (?, ?, ?, ?, ?, ?) ";
                 $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
                 $pre = $conexao->prepare($sql);
                 $pre->execute(array(
@@ -53,7 +53,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                 $registro = json_decode($_POST['registro']);
                 validaDados($registro);
 
-                $sql = "update conta_receber set descricao = ?, favorecido = ?, valor = ?, data_vencimento = ?, categoria_id = ? where id = ? ";
+                $sql = "update conta_pagar set descricao = ?, favorecido = ?, valor = ?, data_vencimento = ?, categoria_id = ? where id = ? ";
                 $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
                 $pre = $conexao->prepare($sql);
                 $pre->execute(array(
@@ -81,7 +81,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                 $registro = new stdClass();
                 $registro = json_decode($_POST["registro"]);
 
-                $sql = "delete from conta_receber where id = ? ";
+                $sql = "delete from conta_pagar where id = ? ";
                 $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
                 $pre = $conexao->prepare($sql);
                 $pre->execute(array(
@@ -100,7 +100,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                 $registro = new stdClass();
                 $registro = json_decode($_POST["registro"]);
 
-                $sql = "select * from conta_receber where id = ?";
+                $sql = "select * from conta_pagar where id = ?";
                 $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
                 $pre = $conexao->prepare($sql);
                 $pre->execute(array(
@@ -138,7 +138,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                     12 => 'Dezembro'
                 ];
 
-                $sql = "select extract(month from data_vencimento) as mes, sum(valor) as valor " . "from conta_receber where usuario_id = ? " .
+                $sql = "select extract(month from data_vencimento) as mes, sum(valor) as valor " . "from conta_pagar where usuario_id = ? " .
                     "and extract(year from data_vencimento) = ? " .
                     "group by mes order by mes";
 
@@ -190,7 +190,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
 function buscarcontapagar(int $id)
 {
     try {
-        $sql = "select * from conta_receber where id = ?";
+        $sql = "select * from conta_pagar where id = ?";
         $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
         $pre = $conexao->prepare($sql);
         $pre->execute(array(
@@ -209,7 +209,7 @@ function buscarcontapagar(int $id)
 function listarcontapagar()
 {
     try {
-        $sql = "select * from conta_receber order by descricao";
+        $sql = "select * from conta_pagar order by descricao";
         $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
         $pre = $conexao->prepare($sql);
         $pre->execute();
