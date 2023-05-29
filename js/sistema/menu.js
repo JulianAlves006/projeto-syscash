@@ -124,6 +124,10 @@ $(document).ready(function () {
         $("#conteudo").load("conta_receber_index.php");
     });
 
+    $("#contapagar_link").click(function (e) {
+        $("#conteudo").load("conta_pagar_index.php");
+    });
+
     $("#usuario_link").click(function (e) {
         $("#conteudo").load("usuario_index.php");
     });

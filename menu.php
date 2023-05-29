@@ -43,6 +43,10 @@ require_once("valida_acesso.php");
             <i class="fas fa-calendar-plus nav_icon"></i>
             <span class="nav_name">Contas a Receber</span>
           </a>
+          <a href="#" class="nav_link" title="Contas a Pagar" id="contapagar_link">
+            <i class="fas fa-file-invoice-dollar nav_icon"></i>
+            <span class="nav_name">Contas a Pagar</span>
+          </a> 
           <a class="nav_link" title="Usuário" id="usuario_link">
             <i class="fas fa-user-cog nav_icon"></i>
             <span class="nav_name">Usuário</span>
