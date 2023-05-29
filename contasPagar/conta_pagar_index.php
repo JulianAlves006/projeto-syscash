@@ -15,11 +15,11 @@ try {
     $usuario_id = isset($_SESSION["usuario_id"]) ? $_SESSION["usuario_id"] : 0;
 
     if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
-        if (isset($_POST["texto_busca_contareceber"])) {
-            $texto_busca = filter_input(INPUT_POST, "texto_busca_contareceber", FILTER_SANITIZE_STRING);
+        if (isset($_POST["texto_busca_contapagar"])) {
+            $texto_busca = filter_input(INPUT_POST, "texto_busca_contapagar", FILTER_SANITIZE_STRING);
         }
-        if (isset($_POST["pagina_contareceber"])) {
-            $pagina = filter_input(INPUT_POST, "pagina_contareceber", FILTER_VALIDATE_INT);
+        if (isset($_POST["pagina_contapagar"])) {
+            $pagina = filter_input(INPUT_POST, "pagina_contapagar", FILTER_VALIDATE_INT);
             $inicio = ($pagina - 1) * REGISTROS_POR_PAGINA;
 
             if ($inicio < 0) {
@@ -46,9 +46,9 @@ try {
         if ($total_paginas > 1) {
             for ($i = 1; $i <= $total_paginas; $i++) {
                 if ($i == $pagina) {
-                    $barra_paginacao .= "<input type='button' name='pagina_contareceber' id='pagina_contareceber' value='" . $i . "' class='btn btn-primary btn-sm' />";
+                    $barra_paginacao .= "<input type='button' name='pagina_contapagar' id='pagina_contapagar' value='" . $i . "' class='btn btn-primary btn-sm' />";
                 } else {
-                    $barra_paginacao .= "<input type='button' name='pagina_contareceber' id='pagina_contareceber' value='" . $i . "' class='btn btn-secondary btn-sm' />";
+                    $barra_paginacao .= "<input type='button' name='pagina_contapagar' id='pagina_contapagar' value='" . $i . "' class='btn btn-secondary btn-sm' />";
                 }
             }
         }
@@ -73,7 +73,7 @@ try {
 <br>
 <div class="container">
     <div class="row">
-        <div id="carregando_contareceber" class="d-none text-center">
+        <div id="carregando_contapagar" class="d-none text-center">
             <img src="./imagens/carregando.gif" />
         </div>
         <div class="col-md-12">
@@ -86,7 +86,7 @@ try {
                 <div class="col-md-4 d-flex justify-content-end">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" title="Home" id="home_index_contareceber"><i class="fas fa-home"></i>
+                            <li class="breadcrumb-item"><a href="#" title="Home" id="home_index_contapagar"><i class="fas fa-home"></i>
                                     <span>Home</span></a></li>
                             <li class="breadcrumb-item active" aria-current="page">Contas a Receber</li>
                         </ol>
@@ -96,13 +96,13 @@ try {
             <hr>
             <div class="row">
                 <div class="col-md-4 d-flex justify-content-start">
-                    <a href="#" class="btn btn-primary btn-sm" title="Adicionar" id="botao_adicionar_contareceber"><i class="fas fa-plus-square"></i>&nbsp;Adicionar</a>
+                    <a href="#" class="btn btn-primary btn-sm" title="Adicionar" id="botao_adicionar_contapagar"><i class="fas fa-plus-square"></i>&nbsp;Adicionar</a>
                 </div>
                 <div class="col-md-4 d-flex justify-content-center">
                 </div>
                 <div class="col-md-4 d-flex justify-content-end">
-                    <input type="text" name="texto_busca" value="<?php echo $texto_busca; ?>" id="texto_busca_contareceber" maxlength="25">
-                    <a id="botao_pesquisar_contareceber" class="btn btn-primary btn-sm" title="Pesquisar"><i class="fas fa-search"></i>&nbsp;Pesquisar</a>
+                    <input type="text" name="texto_busca" value="<?php echo $texto_busca; ?>" id="texto_busca_contapagar" maxlength="25">
+                    <a id="botao_pesquisar_contapagar" class="btn btn-primary btn-sm" title="Pesquisar"><i class="fas fa-search"></i>&nbsp;Pesquisar</a>
                 </div>
             </div>
             <hr>
@@ -120,9 +120,9 @@ try {
             }
             unset($_SESSION["erros"]);
             ?>
-            <div class="alert alert-info alert-dismissible fade show" style="display: none;" id="div_mensagem_contareceber">
-                <button type="button" class="btn-close btn-sm" aria-label="Close" id="div_mensagem_botao_contareceber"></button>
-                <p id="div_mensagem_texto_contareceber"></p>
+            <div class="alert alert-info alert-dismissible fade show" style="display: none;" id="div_mensagem_contapagar">
+                <button type="button" class="btn-close btn-sm" aria-label="Close" id="div_mensagem_botao_contapagar"></button>
+                <p id="div_mensagem_texto_contapagar"></p>
             </div>
             <?php
             if (!count($contas)) {
@@ -135,7 +135,7 @@ try {
             } else {
             ?>
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover" id="lista_contareceber">
+                    <table class="table table-striped table-hover" id="lista_contapagar">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -151,7 +151,7 @@ try {
                             <?php
                             foreach ($contas as $conta) {
                             ?>
-                                <tr id="<?php echo $conta['id'] . "_contareceber"; ?>">
+                                <tr id="<?php echo $conta['id'] . "_contapagar"; ?>">
                                     <td><?php echo $conta["id"]; ?></td>
                                     <td><?php echo $conta["descricao"]; ?></td>
                                     <td><?php echo $conta["favorecido"]; ?></td>
@@ -159,9 +159,9 @@ try {
                                     <td><?php echo date("d/m/Y", strtotime($conta["data_vencimento"])); ?></td>
                                     <td><?php echo buscarCategoria($conta["categoria_id"])[0]["descricao"]; ?></td>
                                     <td>
-                                        <a id="botao_view_contareceber" chave="<?php echo $conta['id']; ?>" class="btn btn-info btn-sm" title="Visualizar"><i class="fas fa-eye"></i></a>
-                                        <a id="botao_editar_contareceber" chave="<?php echo $conta['id']; ?>" class="btn btn-success btn-sm" title="Editar"><i class="fas fa-edit"></i></a>
-                                        <a id="botao_excluir_contareceber" chave="<?php echo $conta['id']; ?>" class="btn btn-danger btn-sm" title="Excluir"><i class="fas fa-trash-alt"></i></a>
+                                        <a id="botao_view_contapagar" chave="<?php echo $conta['id']; ?>" class="btn btn-info btn-sm" title="Visualizar"><i class="fas fa-eye"></i></a>
+                                        <a id="botao_editar_contapagar" chave="<?php echo $conta['id']; ?>" class="btn btn-success btn-sm" title="Editar"><i class="fas fa-edit"></i></a>
+                                        <a id="botao_excluir_contapagar" chave="<?php echo $conta['id']; ?>" class="btn btn-danger btn-sm" title="Excluir"><i class="fas fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
                             <?php
@@ -179,19 +179,19 @@ try {
 </div>
 
 <!--modal de excluir-->
-<div class="modal fade" id="modal_excluir_contareceber" tabindex="-1" aria-labelledby="logoutlabel" aria-hidden="true">
+<div class="modal fade" id="modal_excluir_contapagar" tabindex="-1" aria-labelledby="logoutlabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="logoutlabel_contareceber">Pergunta</h5>
+                <h5 class="modal-title" id="logoutlabel_contapagar">Pergunta</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 Deseja excluir o registro?
-                <input type="hidden" id="id_excluir_contareceber" value="" />
+                <input type="hidden" id="id_excluir_contapagar" value="" />
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="modal_excluir_sim_contareceber">Sim</button>
+                <button type="button" class="btn btn-primary" id="modal_excluir_sim_contapagar">Sim</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
             </div>
         </div>
@@ -200,6 +200,6 @@ try {
 
 <script>
     //devido ao load precisa carregar o arquivo js dessa forma
-    var url = "./js/sistema/conta_receber.js";
+    var url = "./js/conta_pagar.js";
     $.getScript(url);
 </script>
