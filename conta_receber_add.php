@@ -2,8 +2,8 @@
 require_once("valida_acesso.php");
 ?>
 <?php
-require_once("categoria_crud.php");
-require_once("favorecido_crud.php");
+require("categoria_crud.php");
+require("favorecido_crud.php");
 
 //a listagem de categoria é geral poderia ser filtrado por status
 if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
@@ -80,7 +80,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                             </div>
                             <div class="col-md-6">
                             <label for="favorecido" class="form-label">Favorecido</label>
-                                <select name="favorecido_contapagar" id="favorecido_contapagar" class="form-select">
+                                <select name="favorecido_contareceber" id="favorecido_contareceber" class="form-select">
                                     <?php
                                     $favorecidos = listarFavorecidoEntrada();
                                     foreach ($favorecidos as $favorecido) {

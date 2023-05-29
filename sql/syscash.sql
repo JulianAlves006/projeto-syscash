@@ -43,7 +43,7 @@ CREATE TABLE `categoria` (
 CREATE TABLE `conta_pagar` (
   `id` int(3) NOT NULL,
   `descricao` varchar(100) NOT NULL,
-  `favorecido_id` INT(3) NOT NULL,
+  `favorecido` varchar(100) NOT NULL,
   `valor` decimal(10,2) NOT NULL,
   `data_vencimento` date NOT NULL,
   `categoria_id` int(11) NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE `conta_pagar` (
 CREATE TABLE `conta_receber` (
   `id` int(11) NOT NULL,
   `descricao` varchar(100) NOT NULL,
-  `favorecido_id` INT(3) NOT NULL,
+  `favorecido` varchar(100) NOT NULL,
   `valor` decimal(10,2) NOT NULL,
   `data_vencimento` date NOT NULL,
   `categoria_id` int(11) NOT NULL,

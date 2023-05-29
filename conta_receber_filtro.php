@@ -8,10 +8,6 @@ function validaDados($registro)
         $erros["descricao_contareceber"] =  "Descrição: Campo vazio e ou informação inválida!";
     }
 
-    if (!filter_var($registro->favorecido_contareceber, FILTER_SANITIZE_STRING)) {
-        $erros["favorecido_contareceber"] =  "Favorecido: Campo vazio e ou informação inválida!";
-    }
-
     //retirar a máscara nessa sequência
     $registro->valor_contareceber = str_replace(".","",$registro->valor_contareceber);
     $registro->valor_contareceber = str_replace(",",".",$registro->valor_contareceber);

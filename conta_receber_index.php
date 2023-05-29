@@ -4,6 +4,7 @@ require_once("valida_acesso.php");
 <?php
 require_once("conexao.php");
 require_once("categoria_crud.php");
+require_once("favorecido_crud.php");
 
 try {
     //verificando se é uma requisição post para efetuar a pesquisa específica e preparar paginação
@@ -152,9 +153,10 @@ try {
                             foreach ($contas as $conta) {
                             ?>
                                 <tr id="<?php echo $conta['id'] . "_contareceber"; ?>">
+                             
                                     <td><?php echo $conta["id"]; ?></td>
                                     <td><?php echo $conta["descricao"]; ?></td>
-                                    <td><?php echo $conta["favorecido"]; ?></td>
+                                    <td><?php echo buscarfavorecido($conta["favorecido"])[0]["nome"]; ?></td>
                                     <td><?php echo number_format($conta["valor"], 2, ',', '.'); ?></td>
                                     <td><?php echo date("d/m/Y", strtotime($conta["data_vencimento"])); ?></td>
                                     <td><?php echo buscarCategoria($conta["categoria_id"])[0]["descricao"]; ?></td>
