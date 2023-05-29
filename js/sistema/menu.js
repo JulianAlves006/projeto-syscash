@@ -17,6 +17,7 @@ $(document).ready(function () {
             type: "POST",
             cache: false,
             url: "conta_receber_crud.php",
+            url: "conta_pagar_crud.php",
             data: {
                 acao: "grafico",
                 ano: ano,
@@ -51,8 +52,19 @@ $(document).ready(function () {
                         hoverBorderColor: "#b3b3ff",
                         borderWidth: 1,
                         data: receber_valores
+                    }],
+                    datasets: [{
+                        label: "Contas a Pagar",
+                        backgroundColor: "#4080bf",
+                        borderColor: "#3973ac",
+                        hoverBackgroundColor: "#ccccff",
+                        hoverBorderColor: "#b3b3ff",
+                        borderWidth: 1,
+                        data: receber_valores
                     }]
+                
                 };
+                
                 var grafico_canva = $("#grafico");
 
                 var graficoBarra = new Chart(
@@ -68,7 +80,8 @@ $(document).ready(function () {
                                 },
                                 title: {
                                     display: true,
-                                    text: "Contas a Receber - " + ano
+                                    text: "Contas a Receber - " + ano,
+                                    text: "Contas a Pagar - " + ano
                                 }
                             },
                             scales: {
