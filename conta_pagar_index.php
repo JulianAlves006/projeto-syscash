@@ -200,6 +200,6 @@ try {
 
 <script>
     //devido ao load precisa carregar o arquivo js dessa forma
-    var url = "./js/conta_pagar.js";
+    var url = "./js/sistema/conta_pagar.js";
     $.getScript(url);
 </script>
