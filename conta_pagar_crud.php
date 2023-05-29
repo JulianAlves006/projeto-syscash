@@ -118,8 +118,8 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
             try {
                 $ano = filter_var($_POST["ano"], FILTER_VALIDATE_INT);
                 $usuario_id = filter_var($_POST["usuario"], FILTER_VALIDATE_INT);
-                $receber = null;
-                $receber_aux = [];
+                $pagar = null;
+                $pagar_aux = [];
                 $linhas = [];
                 $retorno = [];
 
@@ -149,11 +149,11 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                     $ano
                 ));
 
-                $receber = $pre->fetchAll(PDO::FETCH_ASSOC);
+                $pagar = $pre->fetchAll(PDO::FETCH_ASSOC);
 
                 // aqui extraindo os dados de recebimentos da consulta
-                for ($i = 0; $i < count($receber); $i++) {
-                    $linha = $receber[$i];
+                for ($i = 0; $i < count($pagar); $i++) {
+                    $linha = $pagar[$i];
 
                     if (array_key_exists($linha["mes"], $meses)) {
                         $linhas[$meses[$linha["mes"]]] = $linha["valor"];
@@ -164,15 +164,15 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                 if (count($linhas) < 12) {
                     for ($i = 1; $i < 13; $i++) {
                         if (array_key_exists($meses[$i], $linhas)) {
-                            $receber_aux[$meses[$i]] = $linhas[$meses[$i]];
+                            $pagar_aux[$meses[$i]] = $linhas[$meses[$i]];
                         } else {
-                            $receber_aux[$meses[$i]] = 0;
+                            $pagar_aux[$meses[$i]] = 0;
                         }
                     }
                 }
 
 
-                $retorno[] = $receber_aux;
+                $retorno[] = $pagar_aux;
                 print json_encode($retorno);
             } catch (Exception $e) {
                 echo "Erro: " . $e->getMessage() . "<br>";

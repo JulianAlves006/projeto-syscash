@@ -99,11 +99,11 @@ $(document).ready(function () {
 		$(location).prop("href", "menu.php");
 	});
 
-	//voltando para a página de listagem de contas a receber na mesma página onde ocorreu a chamada
+	//voltando para a página de listagem de contas a pagar na mesma página onde ocorreu a chamada
 	$("#contapagar_index").click(function (e) {
 		e.stopImmediatePropagation();
 
-		$("#conteudo").load("conta_receber_index.php", {
+		$("#conteudo").load("conta_pagar_index.php", {
 			pagina_contapagar: $("#pagina_contapagar").val(),
 			texto_busca_contapagar: $("#texto_busca_contapagar").val()
 		});
@@ -150,18 +150,18 @@ $(document).ready(function () {
 		$.ajax({
 			type: "POST",
 			cache: false,
-			url: "conta_receber_crud.php",
+			url: "conta_pagar_crud.php",
 			data: {
 				acao: operacao,
 				registro: dados
 			},
 			dataType: "json",
 			success: function (e) {
-				$("#conteudo").load("conta_receber_index.php", {
+				$("#conteudo").load("conta_pagar_index.php", {
 					pagina_contapagar: $("#pagina_contapagar").val(),
 					texto_busca_contapagar: $("#texto_busca_contapagar").val()
 				}, function () {
-					$("#div_mensagem_texto_contapagar").empty().append("Contas a receber cadastrada!");
+					$("#div_mensagem_texto_contapagar").empty().append("Contas a pagar cadastrada!");
 					$("#div_mensagem_contapagar").show();
 				});
 			},
@@ -184,13 +184,13 @@ $(document).ready(function () {
 		var pagina = $("#pagina_contapagar.btn.btn-primary.btn-sm").val();
 		var texto_busca = $("#texto_busca_contapagar").val();
 
-		$("#conteudo").load("conta_receber_add.php", function () {
+		$("#conteudo").load("conta_pagar_add.php", function () {
 			$("#carregando_contapagar").removeClass("d-none");
 
 			$.ajax({
 				type: "POST",
 				cache: false,
-				url: "conta_receber_add.php",
+				url: "conta_pagar_add.php",
 				data: {
 					pagina_contapagar: pagina,
 					texto_busca_contapagar: texto_busca
@@ -219,7 +219,7 @@ $(document).ready(function () {
 		$.ajax({
 			type: "POST",
 			cache: false,
-			url: "conta_receber_index.php",
+			url: "conta_pagar_index.php",
 			data: {
 				texto_busca_contapagar: $("#texto_busca_contapagar").val()
 			},
@@ -245,13 +245,13 @@ $(document).ready(function () {
 		var pagina = $("#pagina_contapagar.btn.btn-primary.btn-sm").val();
 		var texto_busca = $("#texto_busca_contapagar").val();
 
-		$("#conteudo").load("conta_receber_edit.php", function () {
+		$("#conteudo").load("conta_pagar_edit.php", function () {
 			$("#carregando_contapagar").removeClass("d-none");
 
 			$.ajax({
 				type: "POST",
 				cache: false,
-				url: "conta_receber_edit.php",
+				url: "conta_pagar_edit.php",
 				data: {
 					id_contapagar: id,
 					pagina_contapagar: pagina,
@@ -280,13 +280,13 @@ $(document).ready(function () {
 		var pagina = $("#pagina_contapagar.btn.btn-primary.btn-sm").val();
 		var texto_busca = $("#texto_busca_contapagar").val();
 
-		$("#conteudo").load("conta_receber_view.php", function () {
+		$("#conteudo").load("conta_pagar_view.php", function () {
 			$("#carregando_contapagar").removeClass("d-none");
 
 			$.ajax({
 				type: "POST",
 				cache: false,
-				url: "conta_receber_view.php",
+				url: "conta_pagar_view.php",
 				data: {
 					id_contapagar: id,
 					pagina_contapagar: pagina,
@@ -319,7 +319,7 @@ $(document).ready(function () {
 		$.ajax({
 			type: "POST",
 			cache: false,
-			url: "conta_receber_index.php",
+			url: "conta_pagar_index.php",
 			data: {
 				pagina_contapagar: pagina,
 				texto_busca_contapagar: texto_busca
@@ -367,14 +367,14 @@ $(document).ready(function () {
 		$.ajax({
 			type: "POST",
 			cache: false,
-			url: "conta_receber_crud.php",
+			url: "conta_pagar_crud.php",
 			data: {
 				acao: "excluir",
 				registro: registroJson
 			},
 			dataType: "json",
 			success: function () {
-				$("#div_mensagem_texto_contapagar").empty().append("Contas a receber excluída!");
+				$("#div_mensagem_texto_contapagar").empty().append("Contas a pagar excluída!");
 				$("#div_mensagem_contapagar").show();
 				$("tr#" + registro.id + "_contapagar").remove();
 			},
