@@ -30,7 +30,7 @@ try {
     $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
 
     //Sql para ser consultada
-    $sql = "select * from favorecido where (id like :palavra or descricao like :palavra) and usuario_id = :id order by id asc ";
+    $sql = "select * from favorecido where (id like :palavra or nome like :palavra) order by id asc ";
 
     // Codificação da paginação
     $pre_pagina = $conexao->prepare($sql);
@@ -129,7 +129,7 @@ try {
             ?>
                 <div class="alert alert-info alert-dismissible fade show" role="alert">
                     <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>
-                    Nenhuma favorecido encontrada!
+                    Nenhum favorecido encontrado!
                 </div>
             <?php
             } else {
@@ -139,7 +139,7 @@ try {
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Descri&ccedil;&atilde;o</th>
+                                <th>Nome</th>
                                 <th>A&ccedil;&otilde;es</th>
                             </tr>
                         </thead>
@@ -149,7 +149,7 @@ try {
                             ?>
                                 <tr id="<?php echo $favorecido['id'] . "_favorecido"; ?>">
                                     <td><?php echo $favorecido["id"]; ?></td>
-                                    <td><?php echo $favorecido["descricao"]; ?></td>
+                                    <td><?php echo $favorecido["nome"]; ?></td>
                                     <td>
                                         <a id="botao_view_favorecido" chave="<?php echo $favorecido['id']; ?>" class="btn btn-info btn-sm" title="Visualizar"><i class="fas fa-eye"></i></a>
                                         <a id="botao_editar_favorecido" chave="<?php echo $favorecido['id']; ?>" class="btn btn-success btn-sm" title="Editar"><i class="fas fa-edit"></i></a>

@@ -43,7 +43,7 @@ CREATE TABLE `categoria` (
 CREATE TABLE `conta_pagar` (
   `id` int(3) NOT NULL,
   `descricao` varchar(100) NOT NULL,
-  `favorecido` varchar(100) NOT NULL,
+  `favorecido_id` INT(3) NOT NULL,
   `valor` decimal(10,2) NOT NULL,
   `data_vencimento` date NOT NULL,
   `categoria_id` int(11) NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE `conta_pagar` (
 CREATE TABLE `conta_receber` (
   `id` int(11) NOT NULL,
   `descricao` varchar(100) NOT NULL,
-  `favorecido` varchar(100) NOT NULL,
+  `favorecido_id` INT(3) NOT NULL,
   `valor` decimal(10,2) NOT NULL,
   `data_vencimento` date NOT NULL,
   `categoria_id` int(11) NOT NULL,
@@ -69,10 +69,10 @@ CREATE TABLE `conta_receber` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `favorecidos`
+-- Estrutura da tabela `favorecido`
 --
 
-CREATE TABLE `favorecidos` (
+CREATE TABLE `favorecido` (
   `id` int(3) NOT NULL,
   `nome` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -126,9 +126,9 @@ ALTER TABLE `conta_receber`
   ADD KEY `fk_conta_receber_usuario` (`usuario_id`);
 
 --
--- Índices para tabela `favorecidos`
+-- Índices para tabela `favorecido`
 --
-ALTER TABLE `favorecidos`
+ALTER TABLE `favorecido`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -160,9 +160,9 @@ ALTER TABLE `conta_receber`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `favorecidos`
+-- AUTO_INCREMENT de tabela `favorecido`
 --
-ALTER TABLE `favorecidos`
+ALTER TABLE `favorecido`
   MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
 
 --

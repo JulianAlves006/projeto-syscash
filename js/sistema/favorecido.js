@@ -131,7 +131,7 @@ $(document).ready(function () {
 					pagina_favorecido: $("#pagina_favorecido").val(),
 					texto_busca_favorecido: $("#texto_busca_favorecido").val()
 				}, function () {
-					$("#div_mensagem_texto_favorecido").empty().append("favorecido cadastrada!");
+					$("#div_mensagem_texto_favorecido").empty().append("favorecido cadastrado!");
 					$("#div_mensagem_favorecido").show();
 				});
 			},

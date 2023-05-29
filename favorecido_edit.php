@@ -81,18 +81,8 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                     <div class="tab-content" id="tabdados_favorecido">
                         <div class="tab-pane fade show active" id="dados_favorecido" role="tabpanel" aria-labelledby="dados_favorecido">
                             <div class="col-md-6">
-                                <label for="descricao_favorecido" class="form-label">Descrição</label>
-                                <input type="text" class="form-control" id="descricao_favorecido" name="descricao_favorecido" maxlength="50" value="<?php echo isset($resultado['descricao']) ? $resultado['descricao'] : ''; ?>" autofocus>
-                            </div>
-                            <div class="col-md-6">
-                                <input class="form-check-input" type="radio" name="tipo_favorecido" id="tipo_favorecido" value="1" <?php echo (isset($resultado['tipo']) && $resultado['tipo'] == 1) ? 'checked' : ''; ?> disabled>
-                                <label class="form-check-label" for="tipo_favorecido">
-                                    Entrada
-                                </label>
-                                <input class="form-check-input" type="radio" name="tipo_favorecido" id="tipo_favorecido" value="2" <?php echo (isset($resultado['tipo']) && $resultado['tipo'] == 2) ? 'checked' : ''; ?> disabled>
-                                <label class="form-check-label" for="tipo_favorecido">
-                                    Saída
-                                </label>
+                                <label for="descricao_favorecido" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="descricao_favorecido" name="descricao_favorecido" maxlength="50" value="<?php echo isset($resultado['nome']) ? $resultado['nome'] : ''; ?>" autofocus>
                             </div>
                             <input type="hidden" id="id_favorecido" name="id_favorecido" value="<?php echo isset($id) ? $id : '' ?>" />
                         </div>
