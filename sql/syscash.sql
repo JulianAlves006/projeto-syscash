@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29-Maio-2023 às 19:03
+-- Tempo de geração: 29-Maio-2023 às 19:15
 -- Versão do servidor: 10.4.21-MariaDB
 -- versão do PHP: 7.4.23
 
@@ -37,6 +37,22 @@ CREATE TABLE `categoria` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `conta_pagar`
+--
+
+CREATE TABLE `conta_pagar` (
+  `id` int(3) NOT NULL,
+  `descricao` varchar(100) NOT NULL,
+  `favorecido` varchar(100) NOT NULL,
+  `valor` decimal(10,2) NOT NULL,
+  `data_vencimento` date NOT NULL,
+  `categoria_id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `conta_receber`
 --
 
@@ -49,6 +65,17 @@ CREATE TABLE `conta_receber` (
   `categoria_id` int(11) NOT NULL,
   `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `favorecidos`
+--
+
+CREATE TABLE `favorecidos` (
+  `id` int(3) NOT NULL,
+  `nome` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -83,12 +110,26 @@ ALTER TABLE `categoria`
   ADD KEY `fk_categoria_usuario` (`usuario_id`);
 
 --
+-- Índices para tabela `conta_pagar`
+--
+ALTER TABLE `conta_pagar`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_categoria` (`categoria_id`),
+  ADD KEY `fk_usuario` (`usuario_id`);
+
+--
 -- Índices para tabela `conta_receber`
 --
 ALTER TABLE `conta_receber`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_conta_receber_categoria` (`categoria_id`),
   ADD KEY `fk_conta_receber_usuario` (`usuario_id`);
+
+--
+-- Índices para tabela `favorecidos`
+--
+ALTER TABLE `favorecidos`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices para tabela `usuario`
@@ -107,10 +148,22 @@ ALTER TABLE `categoria`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT de tabela `conta_pagar`
+--
+ALTER TABLE `conta_pagar`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `conta_receber`
 --
 ALTER TABLE `conta_receber`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `favorecidos`
+--
+ALTER TABLE `favorecidos`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
@@ -127,6 +180,13 @@ ALTER TABLE `usuario`
 --
 ALTER TABLE `categoria`
   ADD CONSTRAINT `fk_categoria_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`);
+
+--
+-- Limitadores para a tabela `conta_pagar`
+--
+ALTER TABLE `conta_pagar`
+  ADD CONSTRAINT `fk_categoria` FOREIGN KEY (`categoria_id`) REFERENCES `categoria` (`id`),
+  ADD CONSTRAINT `fk_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`);
 
 --
 -- Limitadores para a tabela `conta_receber`
