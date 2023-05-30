@@ -114,57 +114,57 @@ $(document).ready(function () {
             }
         });
 
-        $.ajax({
-            type: "POST",
-            cache: false,
-            url: "conta_pagar_crud.php",
-            data: {
-                acao: "grafico",
-                ano: ano,
-                usuario: id_usuario
-            },
-            dataType: "json",
-            success: function (data) {
-                var pagar = [];
-                var pagar_meses = [];
-                var pagar_valores = [];
+        // $.ajax({
+        //     type: "POST",
+        //     cache: false,
+        //     url: "conta_pagar_crud.php",
+        //     data: {
+        //         acao: "grafico",
+        //         ano: ano,
+        //         usuario: id_usuario
+        //     },
+        //     dataType: "json",
+        //     success: function (data) {
+        //         var pagar = [];
+        //         var pagar_meses = [];
+        //         var pagar_valores = [];
         
-                $.each(data, function (i, item) {
-                    if (i == 0) {
-                        pagar = item;
-                    }
-                });
+        //         $.each(data, function (i, item) {
+        //             if (i == 0) {
+        //                 pagar = item;
+        //             }
+        //         });
         
-                $.each(pagar, function (i, item) {
-                    pagar_meses.push(i);
-                    pagar_valores.push(item);
-                });
+        //         $.each(pagar, function (i, item) {
+        //             pagar_meses.push(i);
+        //             pagar_valores.push(item);
+        //         });
         
-                // Adicionando os dados de Contas a Pagar ao objeto 'dados'
-                dados.datasets.push({
-                    label: "Contas a Pagar",
-                    backgroundColor: "red",
-                    borderColor: "#3973ac",
-                    hoverBackgroundColor: "red",
-                    hoverBorderColor: "#b3b3ff",
-                    borderWidth: 1,
-                    data: pagar_valores
-                });
+        //         // Adicionando os dados de Contas a Pagar ao objeto 'dados'
+        //         dados.datasets.push({
+        //             label: "Contas a Pagar",
+        //             backgroundColor: "red",
+        //             borderColor: "#3973ac",
+        //             hoverBackgroundColor: "red",
+        //             hoverBorderColor: "#b3b3ff",
+        //             borderWidth: 1,
+        //             data: pagar_valores
+        //         });
         
-                // Atualizando o gráfico
-                graficoBarra.update();
-            },
-            error: function (e) {
-                $("#div_mensagem_texto_menu").empty().append(e.responseText);
-                $("#div_mensagem_menu").show();
-            },
-            beforeSend: function () {
-                $("#carregando_menu").removeClass("d-none");
-            },
-            complete: function () {
-                $("#carregando_menu").addClass("d-none");
-            }
-        });
+        //         // Atualizando o gráfico
+        //         graficoBarra.update();
+        //     },
+        //     error: function (e) {
+        //         $("#div_mensagem_texto_menu").empty().append(e.responseText);
+        //         $("#div_mensagem_menu").show();
+        //     },
+        //     beforeSend: function () {
+        //         $("#carregando_menu").removeClass("d-none");
+        //     },
+        //     complete: function () {
+        //         $("#carregando_menu").addClass("d-none");
+        //     }
+        // });
 
 
 
