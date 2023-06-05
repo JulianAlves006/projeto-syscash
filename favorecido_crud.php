@@ -130,7 +130,7 @@ function buscarfavorecido(int $id)
     }
 }
 
-function listarCategoria()
+function listarFavorecido()
 {
     try {
         $usuario_id = isset($_SESSION["usuario_id"]) ? $_SESSION["usuario_id"] : 0;
