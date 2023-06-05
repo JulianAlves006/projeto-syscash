@@ -30,7 +30,7 @@ try {
     $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
 
     //Sql para ser consultada
-    $sql = "select * from favorecido where (id like :palavra or nome like :palavra) order by id asc ";
+    $sql = "select * from favorecido where (id like :palavra or nome like :palavra) and id_usuario = :id order by id asc ";
 
     // Codificação da paginação
     $pre_pagina = $conexao->prepare($sql);

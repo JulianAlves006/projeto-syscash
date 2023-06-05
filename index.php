@@ -151,8 +151,7 @@
             &copy; 2021–<script>
                 document.write(new Date().getFullYear())
             </script>
-            | Syscash - O Seu Sistema de Finanças | Alexandre -
-            <a href="https://www.youtube.com/channel/UCUeidwLoy7YK4kEeuq2sPgw" target="_blank">Peregrino de TI</a>
+            | Syscash - O Seu Sistema de Finanças | Julian Alves & Kelcia Kohls Antiuk
         </p>
         <div class="text-center">
             <p>

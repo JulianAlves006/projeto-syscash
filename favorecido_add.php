@@ -72,6 +72,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                                 <input type="text" class="form-control" id="descricao_favorecido" name="descricao_favorecido" maxlength="50" autofocus>
                             </div>
                             <input type="hidden" id="id_favorecido" value="<?php echo isset($id) ? $id : '' ?>" />
+                            <input type="hidden" id="usuario_id_favorecido" name="usuario_id_favorecido" value="<?php echo isset($usuario_id) ? $usuario_id : '' ?>" />
                         </div>
                     </div>
                     <br>

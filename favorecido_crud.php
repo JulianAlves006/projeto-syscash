@@ -19,11 +19,12 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                 $registro = new stdClass();
                 $registro = json_decode($_POST['registro']);
 
-                $sql = "insert into favorecido(nome) VALUES (?) ";
+                $sql = "insert into favorecido(nome, id_usuario) VALUES (?, ?) ";
                 $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
                 $pre = $conexao->prepare($sql);
                 $pre->execute(array(
                     $registro->descricao_favorecido,
+                    $registro->usuario_id_favorecido
                 ));
                 print json_encode($conexao->lastInsertId());
             } catch (Exception $e) {
@@ -129,14 +130,38 @@ function buscarfavorecido(int $id)
     }
 }
 
+function listarCategoria()
+{
+    try {
+        $usuario_id = isset($_SESSION["usuario_id"]) ? $_SESSION["usuario_id"] : 0;
+
+        $sql = "select * from favorecido where id_usuario = ? order by descricao";
+        $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
+        $pre = $conexao->prepare($sql);
+        $pre->execute(array(
+            $usuario_id
+        ));
+        $pre->execute();
+
+        return $pre->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $e) {
+        echo "Erro: " . $e->getMessage() . "<br>";
+    } finally {
+        $conexao = null;
+    }
+}
+
 function listarFavorecidoEntrada()
 {
     try {
+        $usuario_id = isset($_SESSION["usuario_id"]) ? $_SESSION["usuario_id"] : 0;
 
-        $sql = "select * from favorecido order by nome";
+        $sql = "select * from favorecido where id_usuario = ? order by nome";
         $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
         $pre = $conexao->prepare($sql);
-        $pre->execute(array());
+        $pre->execute(array(
+            $usuario_id
+        ));
         $pre->execute();
 
         return $pre->fetchAll(PDO::FETCH_ASSOC);

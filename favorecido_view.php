@@ -81,30 +81,14 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                             <h4>
                                 <b><?= isset($resultado["id"]) ? $resultado["id"] : "" ?></b>
                                 <b><?= " - "  ?></b>
-                                <b><?= isset($resultado["descricao"]) ? $resultado["descricao"] : "" ?>
+                                <b><?= isset($resultado["nome"]) ? $resultado["nome"] : "" ?>
                                 </b>
                             </h4>
                             <br>
                             <dl>
-                                <dt>Descrição</dt>
+                                <dt>Nome</dt>
                                 <dd>
-                                    <?= isset($resultado["descricao"]) ? $resultado["descricao"] : ""; ?>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>Tipo</dt>
-                                <dd>
-                                    <?php
-                                    if (isset($resultado["tipo"])) {
-                                        if ($resultado["tipo"] == 1) {
-                                            echo "Entrada";
-                                        } else {
-                                            echo "Saída";
-                                        }
-                                    } else {
-                                        echo "";
-                                    }
-                                    ?>
+                                    <?= isset($resultado["nome"]) ? $resultado["nome"] : ""; ?>
                                 </dd>
                             </dl>
                         </div>
