@@ -82,7 +82,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                                 <label for="favorecido" class="form-label">Favorecido</label>
                                 <select name="favorecido_contapagar" id="favorecido_contapagar" class="form-select">
                                     <?php
-                                    $favorecidos = listarFavorecidoEntrada();
+                                    $favorecidos = listarFavorecido();
                                     foreach ($favorecidos as $favorecido) {
                                         echo "<option value='" . $favorecido["id"] . "'>" . $favorecido["nome"] . "</option>";
                                     }
@@ -102,7 +102,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                             <div class="col-md-6">
                                 <label for="categoria_contapagar" class="form-label">Categoria</label><select name="categoria_id_contapagar" id="categoria_id_contapagar" class="form-select">
                                     <?php
-                                    $categorias = listarCategoriaEntrada();
+                                    $categorias = listarCategoriaSaida();
                                     foreach ($categorias as $categoria) {
                                         echo "<option value='" . $categoria["id"] . "'>" . $categoria["descricao"] . "</option>";
                                     }

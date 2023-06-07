@@ -175,3 +175,24 @@ function listarCategoriaEntrada()
         $conexao = null;
     }
 }
+
+function listarCategoriaSaida()
+{
+    try {
+        $usuario_id = isset($_SESSION["usuario_id"]) ? $_SESSION["usuario_id"] : 0;
+
+        $sql = "select * from categoria where usuario_id = ? and tipo = 2 order by descricao";
+        $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
+        $pre = $conexao->prepare($sql);
+        $pre->execute(array(
+            $usuario_id
+        ));
+        $pre->execute();
+
+        return $pre->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $e) {
+        echo "Erro: " . $e->getMessage() . "<br>";
+    } finally {
+        $conexao = null;
+    }
+}
