@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29-Maio-2023 às 19:15
--- Versão do servidor: 10.4.21-MariaDB
--- versão do PHP: 7.4.23
+-- Tempo de geração: 15-Jun-2023 às 18:58
+-- Versão do servidor: 10.4.8-MariaDB
+-- versão do PHP: 7.3.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -33,6 +34,13 @@ CREATE TABLE `categoria` (
   `tipo` smallint(6) NOT NULL,
   `usuario_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `categoria`
+--
+
+INSERT INTO `categoria` (`id`, `descricao`, `tipo`, `usuario_id`) VALUES
+(2, 'SIm', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -74,8 +82,16 @@ CREATE TABLE `conta_receber` (
 
 CREATE TABLE `favorecido` (
   `id` int(3) NOT NULL,
-  `nome` varchar(100) NOT NULL
+  `nome` varchar(100) NOT NULL,
+  `usuario_id` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `favorecido`
+--
+
+INSERT INTO `favorecido` (`id`, `nome`, `usuario_id`) VALUES
+(1, 'Ju', 1);
 
 -- --------------------------------------------------------
 
@@ -129,7 +145,8 @@ ALTER TABLE `conta_receber`
 -- Índices para tabela `favorecido`
 --
 ALTER TABLE `favorecido`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_fk_usuario` (`usuario_id`);
 
 --
 -- Índices para tabela `usuario`
@@ -145,7 +162,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `conta_pagar`
@@ -163,7 +180,7 @@ ALTER TABLE `conta_receber`
 -- AUTO_INCREMENT de tabela `favorecido`
 --
 ALTER TABLE `favorecido`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
@@ -194,6 +211,12 @@ ALTER TABLE `conta_pagar`
 ALTER TABLE `conta_receber`
   ADD CONSTRAINT `fk_conta_receber_categoria` FOREIGN KEY (`categoria_id`) REFERENCES `categoria` (`id`),
   ADD CONSTRAINT `fk_conta_receber_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`);
+
+--
+-- Limitadores para a tabela `favorecido`
+--
+ALTER TABLE `favorecido`
+  ADD CONSTRAINT `id_fk_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

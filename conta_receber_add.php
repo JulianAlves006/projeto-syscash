@@ -82,7 +82,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                             <label for="favorecido" class="form-label">Favorecido</label>
                                 <select name="favorecido_contareceber" id="favorecido_contareceber" class="form-select">
                                     <?php
-                                    $favorecidos = listarFavorecidoEntrada();
+                                    $favorecidos = listarFavorecido();
                                     foreach ($favorecidos as $favorecido) {
                                         echo "<option value='" . $favorecido["id"] . "'>" . $favorecido["nome"] . "</option>";
                                     }
