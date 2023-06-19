@@ -25,6 +25,15 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
         if (!$resultado) {
             throw new Exception("Não foi possível realizar a consulta!");
         }
+
+        $select = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
+
+        $pro = $select->prepare('SELECT * FROM favorecido WHERE id = ?');
+        $pro->execute(array(
+            $resultado['favorecido']
+        ));
+        $favorecido = $pro->fetch(PDO::FETCH_ASSOC);
+
     } catch (Exception $e) {
         $erros[] = $e->getMessage();
         $_SESSION["erros"] = $erros;
@@ -97,7 +106,7 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                             <dl>
                                 <dt>Favorecido</dt>
                                 <dd>
-                                    <?= isset($resultado["favorecido"]) ? $resultado["favorecido"] : ""; ?>
+                                    <?= isset($favorecido['nome']) ? $favorecido['nome'] : ""; ?>
                                 </dd>
                             </dl>
                             <dl>

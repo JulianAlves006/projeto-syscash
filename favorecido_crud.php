@@ -72,14 +72,32 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                 $registro = new stdClass();
                 $registro = json_decode($_POST["registro"]);
 
-                $sql = "delete from favorecido where id = ? ";
-                $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
-                $pre = $conexao->prepare($sql);
-                $pre->execute(array(
+                $select = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
+                $pro = $select->prepare('SELECT * FROM conta_receber WHERE favorecido = ?');
+                $pro->execute(array(
                     $registro->id
                 ));
 
-                print json_encode(1);
+                if (!$pro->rowCount() > 0) {
+                    $select = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
+                    $pra = $select->prepare('SELECT * FROM conta_pagar WHERE favorecido = ?');
+                    $pra->execute(array(
+                        $registro->id
+                    ));
+                    if(!$pra->rowCount() > 0){
+                        $sql = "delete from favorecido where id = ? ";
+                        $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
+                        $pre = $conexao->prepare($sql);
+                        $pre->execute(array(
+                            $registro->id
+                        ));
+                    }else{
+                        echo "Erro: Este favorecido está sendo utilizado em alguma conta sua em contas a pagar!! exclua sua conta a pagar antes de excluir ele. <br>";
+                    }
+                }
+                else{
+                    echo "Erro: Este favorecido está sendo utilizado em alguma conta sua em contas a receber!! exclua sua conta a receber antes de excluir ele. <br>";
+                }
             } catch (Exception $e) {
                 echo "Erro: " . $e->getMessage() . "<br>";
             } finally {

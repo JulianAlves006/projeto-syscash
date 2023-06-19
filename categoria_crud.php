@@ -74,14 +74,33 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                 $registro = new stdClass();
                 $registro = json_decode($_POST["registro"]);
 
-                $sql = "delete from categoria where id = ? ";
-                $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
-                $pre = $conexao->prepare($sql);
-                $pre->execute(array(
+                $select = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
+                $pro = $select->prepare('SELECT * FROM conta_receber WHERE categoria_id = ?');
+                $pro->execute(array(
                     $registro->id
                 ));
 
-                print json_encode(1);
+                if (!$pro->rowCount() > 0) {
+                    $select = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
+                    $pra = $select->prepare('SELECT * FROM conta_pagar WHERE categoria_id = ?');
+                    $pra->execute(array(
+                        $registro->id
+                    ));
+                    if (!$pra->rowCount() > 0) {
+                        $sql = "delete from categoria where id = ? ";
+                        $conexao = new PDO("mysql:host=" . SERVIDOR . ";dbname=" . BANCO, USUARIO, SENHA);
+                        $pre = $conexao->prepare($sql);
+                        $pre->execute(array(
+                            $registro->id
+                        ));
+                    }
+                    else{
+                        echo 'Erro: categoria ja adicionada em uma conta a pagar!! <br>';
+                    }
+                }
+                else{
+                    echo 'Erro: categoria ja adicionada em uma conta a receber!! <br>';
+                }
             } catch (Exception $e) {
                 echo "Erro: " . $e->getMessage() . "<br>";
             } finally {
