@@ -91,6 +91,8 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                         $pre->execute(array(
                             $registro->id
                         ));
+
+                        print json_decode(1);
                     }else{
                         echo "Erro: Este favorecido está sendo utilizado em alguma conta sua em contas a pagar!! exclua sua conta a pagar antes de excluir ele. <br>";
                     }

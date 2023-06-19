@@ -93,6 +93,8 @@ if (filter_input(INPUT_SERVER, "REQUEST_METHOD") === "POST") {
                         $pre->execute(array(
                             $registro->id
                         ));
+                        
+                        print json_decode(1);
                     }
                     else{
                         echo 'Erro: categoria ja adicionada em uma conta a pagar!! <br>';
