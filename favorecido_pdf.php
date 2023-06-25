@@ -38,7 +38,7 @@ class favorecidoPDF extends FPDF
     function listagem()
     {
         try {
-            $cabecalho = ["ID", "Descrição", "Tipo"];
+            $cabecalho = ["ID", "Nome"];
             $dados = listarfavorecido();
 
             // Cabeçalho
